@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>CMAD Bank Online</title>
+<script type="text/javascript">
+	function openAccount(){
+		var name = document.getElementById("name").value;
+		var phoneNumber = document.getElementById("phoneNumber").value;
+		var data = {
+				name: name,
+				phoneNumber: phoneNumber
+		};
+		var xhr = new XMLHttpRequest();
+		xhr.open("post", "http://localhost:8080/cmad/online/bank/account", true);
+		xhr.setHeaders("Content-Type", "application/json");
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4 && xhr.status == 200){
+				console.log("Account Number: " + xhr.responseText);
+			}
+		};
+		xhr.send(JSON.stringify(data));
+	}
+</script>
+</head>
+<body>
+	<h1>CMAD Bank Online</h1>
+	<a href='open.html'>Open Account</a> |
+	<a href='view.html'>View Account</a>
+	<hr />
+	Open A New Account
+	<table>
+		<tr>
+			<td>Name</td>
+			<td><input id='name'></td>
+		</tr>
+		<tr>
+			<td>Phone Number</td>
+			<td><input id='phoneNumber'></td>
+		</tr>
+		<tr>
+			<td><button onclick='openAccount()'>Open Account</button></td>
+		</tr>
+	</table>
+</body>
+</html>
