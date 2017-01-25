@@ -87,14 +87,24 @@ $(document)
 											contentType : 'application/json',
 											success : function(response) {
 												console.log("Successfully Logged in: "+response);
-												$("#openResults")
-														.html(
-																"User Logged in "
-																		+ response);
-												$("#loginDiv").hide();
-												$("#userDetailsDiv").hide();
-//												$("#openResults").show();
-												$("#userBlogEntryDiv").show();
+												if(response>0){
+													$("#openResults")
+													.html(
+															"User Logged in "
+															+ response);
+													$("#loginDiv").hide();
+													$("#userDetailsDiv").hide();
+//													$("#openResults").show();
+													$("#userBlogEntryDiv").show();
+												}else{
+													console.log("Not a subscriber: "+response);
+													
+//													$("#openResults").html("User Not Logged in "+ response);
+//													$("#openResults").show();
+													$("#loginDiv").hide();
+													$("#userBlogEntryDiv").hide();
+													$("#userDetailsDiv").show();
+												}
 											},
 											error : function(response) {
 												console.log("Not a subscriber: "+response);
