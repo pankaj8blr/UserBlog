@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,11 +34,11 @@ public class Post {
 	private String description;
 	
 	@Column(name="POST_CREATION_TIME")
-	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date createdTime;
+//	@Temporal(value = TemporalType.TIMESTAMP)
+	private String creationTime;
 	//private Date modifiedTime;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name="POST_TOPIC",joinColumns=@JoinColumn(name="POST_ID"),
 	inverseJoinColumns=@JoinColumn(name="TOPIC_ID")
 	)
@@ -53,16 +54,16 @@ public class Post {
 		
 	}
 	
-	public Post(String title, String description, Date createdTime, Topic topic, Comment comment) {
+	public Post(String title, String description, String createdTime, Topic topic, Comment comment) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.createdTime = createdTime;
+		this.creationTime = createdTime;
 		this.topic = topic;
 //		this.comment = (Collection<Comment>) comment;
 	}
 	
-	public Post(int id, String title, String description, Date createdTime, Topic topic, Comment comment) {
+	public Post(int id, String title, String description, String createdTime, Topic topic, Comment comment) {
 		this(title,description,createdTime,topic,comment);
 		this.id = id;
 	}
@@ -87,11 +88,11 @@ public class Post {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getCreatedTime() {
-		return createdTime;
+	public String getCreationTime() {
+		return creationTime;
 	}
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
+	public void setCreationTime(String createdTime) {
+		this.creationTime = createdTime;
 	}
 	public Topic getTopic() {
 		return topic;

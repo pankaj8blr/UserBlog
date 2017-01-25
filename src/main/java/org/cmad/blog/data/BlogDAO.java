@@ -11,7 +11,9 @@ public interface BlogDAO {
 	public AppUser updateAppUser(AppUser appUser);
 	public int authenticateAppUser(AppUser appUser);
 	
+//	public int createBlog(Post post);
 	public boolean createBlog(Post post);
+
 	public Blog readBlog();
 	public Blog updateBlog(Post post) ;
 	public boolean deleteBlog(Post post);

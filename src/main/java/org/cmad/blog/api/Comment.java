@@ -27,8 +27,8 @@ public class Comment {
 	private String commentDesc;
 	
 	@Column(name="COMMENT_CREATION_TIME")
-	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date createdTime;
+//	@Temporal(value = TemporalType.TIMESTAMP)
+	private String creationTime;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private AppUser byUser;
@@ -36,14 +36,14 @@ public class Comment {
 	public Comment(){
 		
 	}
-	public Comment(String comment,Date createdTime,AppUser user){
+	public Comment(String comment,String createdTime,AppUser user){
 		super();
 		this.commentDesc=comment;
-		this.createdTime=createdTime;
+		this.creationTime=createdTime;
 		this.byUser = user;
 	}
 	
-	public Comment(int id, String comment,Date createdTime,AppUser user){
+	public Comment(int id, String comment,String createdTime,AppUser user){
 		this(comment,createdTime,user);
 		this.id=id;
 	}
@@ -62,11 +62,12 @@ public class Comment {
 	public void setCommentDesc(String comment) {
 		this.commentDesc = comment;
 	}
-	public Date getCreatedTime() {
-		return createdTime;
+
+	public String getCreationTime() {
+		return creationTime;
 	}
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
+	public void setCreationTime(String creationTime) {
+		this.creationTime = creationTime;
 	}
 	public AppUser getByUser() {
 		return byUser;

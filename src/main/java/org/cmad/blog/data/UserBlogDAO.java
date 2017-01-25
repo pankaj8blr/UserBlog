@@ -1,6 +1,6 @@
 package org.cmad.blog.data;
 
-import java.util.Iterator;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -47,18 +47,25 @@ public class UserBlogDAO implements BlogDAO {
 		AppUser user = (AppUser) q.getSingleResult();*/
 		
 		AppUser u=null;
-	    Iterator<AppUser> it =  em.createQuery("SELECT u FROM AppUser u").getResultList().iterator();
-	    if(it.hasNext()){
-	           u=it.next();
-	           if (u!=null && userName.equalsIgnoreCase(u.getEmail())&&password.equals(u.getPassword())) {
-	   			appUserId=u.getAppUserId();
-	   			}
-	           System.out.println("UserBlogDAO.authenticateAppUser()user: "+u);
-	   		System.out.println("UserBlogDAO.authenticateAppUser()user.getEmail(): "+u.getEmail()+",user.getPassword(): "+u.getPassword());
-	     }
+//	    Iterator<AppUser> it =  em.createQuery("SELECT u FROM AppUser u").getResultList().iterator();
+		List<AppUser> list = em.createQuery("SELECT u FROM AppUser u").getResultList();
+		if(list!=null){
+			for(int index=0;index<list.size();index++){
+				u = (AppUser)list.get(index);
+				if(u!=null){
+
+					if (u!=null && userName.equalsIgnoreCase(u.getEmail())&&password.equals(u.getPassword())) {
+						appUserId=u.getAppUserId();
+						break;
+					}
+					System.out.println("UserBlogDAO.authenticateAppUser()user: "+u);
+					System.out.println("UserBlogDAO.authenticateAppUser()user.getEmail(): "+u.getEmail()+",user.getPassword(): "+u.getPassword());
+				}
+			}
+		}
 		
 		
-		
+	  
 		em.getTransaction().commit();
 	    em.close();
 	    
@@ -66,6 +73,19 @@ public class UserBlogDAO implements BlogDAO {
 		return appUserId;
 	}
 
+	/*@Override
+	public int createBlog(Post post) {
+//		if(isPostValid(post)){
+			System.out.println("UserBlogDAO.createBlog()post: "+post);
+			EntityManager em = factory.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(post);
+			em.getTransaction().commit();
+			em.close();
+			return post.getId();
+//		}
+	}*/
+	
 	@Override
 	public boolean createBlog(Post post) {
 		if(isPostValid(post)){
@@ -73,6 +93,7 @@ public class UserBlogDAO implements BlogDAO {
 		}
 		return true;
 	}
+
 
 	@Override
 	public Blog readBlog() {

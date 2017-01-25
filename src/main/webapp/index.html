@@ -8,11 +8,11 @@
 <link rel='stylesheet' href='blog.css'>
 <link>
 </head>
-<body onload="document.signinForm.userName.focus();">
+<body>
 	<h1>User Blog</h1>
 	<hr />
 	<form name="signinForm">
-		<div id='loginForm'>
+		<div id='loginDiv'>
 			<label><b>Username</b></label> <input type="text"placeholder="Enter Username" id="uname" name="userName" required> 
 			<label><b>Password</b></label>	<input type="password" placeholder="Enter Password" id="psw"  name="password" required>
 
@@ -24,9 +24,9 @@
 				<span class="psw">Forgot <a href="#">password?</a></span>
 			</div>
 		</div>
-	</form>
-	<form name="signupForm">
-		<div id='userDeatilsForm'>
+<!-- 	</form>
+	<form name="signupForm"> -->
+		<div id='userDetailsDiv'>
 			<h2>Open A New User Account</h2>
 			<table>
 				<tr>
@@ -75,10 +75,34 @@
 			</tr> -->
 			</table>
 			<div style="background-color: #f1f1f1">
-				<button type="button" id='addUser' class="addUser">Add User</button>
-				<button type="button" id='updateUser' class="updateUser">Update
-					User</button>
-				<button type="button" id='back' class="back">back</button>
+				<button type="button" id='addUser' class="addUser">Add</button>
+				<button type="button" id='updateUser' class="updateUser">Update</button>
+				<button type="button" id='back' class="back">Back</button>
+			</div>
+		</div>
+	<!-- </form>
+	<form name="blogentryform"> -->
+		<div id='userBlogEntryDiv'>
+			<h1>Welcome User</h1>
+			<h2>Add a Blog</h2>
+			<table>
+				<tr>
+					<td>Blog Title</td>
+					<td><input type="text" name="BlogTitle" id='blogtitle'
+						placeholder="Mention Blog Title here"></td>
+				</tr>
+				<tr>
+					<td>Description</td>
+					<td><textarea rows="8" cols="60" name="BlogDiscription" id='blogdesc'
+						placeholder="Characters:min 1 to max 1000"> </textarea></td>
+				</tr>
+				
+			</table>
+			<div style="background-color: #f1f1f1">
+				<button type="button" id='submitBlog' class="submitBlog">Add</button>
+				<button type="button" id='updateBlog' class="updateBlogr">Update</button>
+				<button type="button" id='backToUpdateUser' class="back">Back</button>
+				<button type="button" id='searchBlog' class="back">Search</button>
 			</div>
 		</div>
 	</form>

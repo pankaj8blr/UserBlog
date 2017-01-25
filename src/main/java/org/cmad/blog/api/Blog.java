@@ -15,6 +15,8 @@ public interface Blog {
 	
 	public int authenticatedAppUser(AppUser user) throws UserNotFoundException;
 
+//	public int addPost(Post post) throws BlogException;
+	
 	public boolean addPost(Post post) throws BlogException;
 
 	public boolean addComment(Comment comment) throws BlogException;

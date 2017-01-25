@@ -10,16 +10,34 @@ import javax.ws.rs.core.Response;
 
 import org.cmad.blog.api.Blog;
 import org.cmad.blog.api.Comment;
-
+import org.cmad.blog.api.Post;
+import org.cmad.blog.biz.UserBlog;
 
 @Path("/blog")
 public class BlogController {
+	public BlogController() {
+		System.out.println("BlogController.BlogController()");
+	}
+	/*@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/addblog")
+	public Response addBlog(Post post) {
+		System.out.println("BlogController.addBlog() post: "+post);
+		Blog blog = new UserBlog();
+		System.out.println("BlogController.addBlog()blog: "+blog);
+		int postId = blog.addPost(post);
+		System.out.println("postId: "+postId);;
+		return Response.ok().entity(postId + "").build();
+	}*/
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/addblog")
 	public Response addBlog(Blog blog) {
 		return Response.ok().entity(blog).build();
 	}
+
+
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)

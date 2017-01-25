@@ -1,106 +1,115 @@
 $(document)
-.ready(
-		function() {
-			$('#registerbutton')
-			.click(function() {
-				$("#userDeatilsForm").show();
-				$("#loginForm").hide();
-				document.signupForm.Name.focus();
-			});
-			$('#back')
-			.click(function() {
-				$("#userDeatilsForm").hide();
-				$("#loginForm").show();
-				document.signinForm.userName.focus()
-			});
-			$('#addUser')
-			.click(
-					function() {
-						var name = $("#name").val();
-						var phoneNumber = $("#phoneNumber").val();
-						var emailId = $("#emailId").val();
-						var password = $("#password").val();
-						var dob = $("#dob").val();
-						var interest = $("#interest").val();
-						var data = {
-								email : emailId,
-								password:password,
-								personalInfo:{name : name,
-									phoneNum : phoneNumber,
-									dob : dob},
-									topic : {name:interest}
-						};
-						console.log ( '#name: '+name+',phoneNumber: '+phoneNumber+',emailId: '+emailId+',dob: '+dob+',interest: '+interest );
+		.ready(
+				function() {
+					$('#registerbutton')
+					.click(function() {
+						$("#userDetailsDiv").show();
+						$("#loginDiv").hide();
+						$("#userBlogEntryDiv").hide();
+						document.signinForm.Name.focus();
+					});
+					$('#back')
+					.click(function() {
+						$("#userDetailsDiv").hide();
+						$("#loginDiv").show();
+						$("#userBlogEntryDiv").hide();
+						document.signinForm.uname.focus();
+					});
+					$('#backToUpdateUser')
+					.click(function() {
+						$("#userBlogEntryDiv").hide();
+						$("#loginDiv").hide();
+						$("#userDetailsDiv").show();
+						document.signinForm.Name.focus();
+					});
+					$('#addUser')
+							.click(
+									function() {
+										var name = $("#name").val();
+										var phoneNumber = $("#phoneNumber").val();
+										var emailId = $("#emailId").val();
+										var password = $("#password").val();
+										var dob = $("#dob").val();
+										var interest = $("#interest").val();
+										var data = {
+											email : emailId,
+											password:password,
+											personalInfo:{name : name,
+											phoneNum : phoneNumber,
+											dob : dob},
+											topic : {name:interest}
+										};
+										  console.log ( '#name: '+name+',phoneNumber: '+phoneNumber+',emailId: '+emailId+',dob: '+dob+',interest: '+interest );
 						if(formValidation()){
-							$.ajax({
-								url : 'http://localhost:8080/blog/user/account/adduser',
-								type : 'post',
-								contentType : 'application/json',
-								success : function(response) {
-									$("#openResults")
-									.html(
-											"User added "
-											+ response);
-									$("#userDeatilsForm").hide();
-									$("#openResults")
-									.show();
-								},
-								data : JSON.stringify(data)
-							});
+										$.ajax({
+													url : 'http://localhost:8080/blog/user/account/adduser',
+													type : 'post',
+													contentType : 'application/json',
+													success : function(response) {
+														console.log("Success response: "+response);
+														$("#openResults")
+																.html(
+																		"User added "
+																				+ response);
+														$("#userDetailsDiv").hide();
+//														$("#openResults").show();
+														$("#userBlogEntryDiv").show();
+													},
+													data : JSON.stringify(data)
+												});
 						}
-					});
-			$('#loginUser')
-			.click(
-					function() {
-						var name = "UserName";
-						var phoneNumber ="phoneNumber";
-						var emailId = $("#uname").val();
-						var password = $("#psw").val();
-						var dob = "dob";
-						var interest = "interest";
-						var data = {
-								email : emailId,
-								password:password,
-								personalInfo:{name : name,
+									});
+					$('#loginUser')
+					.click(
+							function() {
+								console.log("loginUser");
+								var name = "UserName";
+								var phoneNumber ="phoneNumber";
+								var emailId = $("#uname").val();
+								var password = $("#psw").val();
+								var dob = "dob";
+								var interest = "interest";
+								var data = {
+									email : emailId,
+									password:password,
+									personalInfo:{name : name,
 									phoneNum : phoneNumber,
 									dob : dob},
 									topic : {name:interest}
-						};
-						console.log ( '#name: '+name+',phoneNumber: '+phoneNumber+',emailId: '+emailId+',password: '+password+',interest: '+interest );
-						$.ajax({
-							url : 'http://localhost:8080/blog/user/account/authenticateuser',
-							type : 'post',
-							contentType : 'application/json',
-							success : function(response) {
-								$("#openResults")
-								.html(
-								"Welcome To User Blog ");
-								$("#loginForm").hide();
-								$("#userDeatilsForm").hide();
-								$("#openResults")
-								.show();
-							},
-							failure : function(response) {
-								$("#openResults")
-								.html(
-										"invalid login "
-										+ response);
-								$("#userDeatilsForm").hide();
-								$("#openResults")
-								.show();
-							},
-							data : JSON.stringify(data)
-						});
-					});
-
-		});
+								};
+								  console.log ( '#name: '+name+',phoneNumber: '+phoneNumber+',emailId: '+emailId+',password: '+password+',interest: '+interest );
+								$.ajax({
+											url : 'http://localhost:8080/blog/user/account/authenticateuser',
+											type : 'post',
+											contentType : 'application/json',
+											success : function(response) {
+												console.log("success response: "+ response);
+//												$("#openResults").html("Welcome To User Blog ");
+//												$("#openResults").show();
+//												$("#loginDiv").hide();
+//												$("#userDetailsDiv").hide();
+												$("#userBlogEntryDiv").show();
+											},
+											/*failure : function(response) {
+												$("#openResults")
+														.html(
+																"invalid login "
+																		+ response);
+												$("#userDetailsDiv").hide();
+												$("#openResults").show();
+											},*/
+											data : JSON.stringify(data)
+										});
+							});
+				
+				});
 
 function formValidation()  {
-	var uname = document.signupForm.Name;  
-	var uphonenumber = document.signupForm.PhoneNo;  
-	var uemail = document.signupForm.Email;  
-	var passid = document.signupForm.Pwd;  
-	var dob = document.signupForm.Dob;  
+	var uname = document.signinForm.Name;  
+	var uphonenumber = document.signinForm.PhoneNo;  
+	var uemail = document.signinForm.Email;  
+	var passid = document.signinForm.Pwd;  
+	var dob = document.signinForm.Dob;  
 	if(validateName(uname)) {  
 		if(validateContactNumber(uphonenumber,10,6)){
 			if(validateEmail(uemail)) {  
@@ -215,13 +224,13 @@ function validateEmail(inputText)
 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
 if(inputText.value.match(mailformat))  
 {  
-document.signupForm.Email.focus();  
+document.signinForm.Email.focus();  
 return true;  
 }  
 else  
 {  
 alert("You have entered an invalid email address!");  
-document.form1.text1.focus();  
+document.signinForm.Email.focus();  
 return false;  
 }  
 }
@@ -300,7 +309,3 @@ function validatedate(inputText)
 		return false;  
 	}  
 }  
-
-
-
-

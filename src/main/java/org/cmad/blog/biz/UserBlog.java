@@ -86,6 +86,21 @@ public class UserBlog implements Blog {
 		return isUserPersonalInfoProper;
 	}
 
+	/*@Override
+	public int addPost(Post post) throws BlogException {
+//		boolean isUserPostAdded = false;
+		System.out.println("UserBlog.addPost()post: "+post);
+		int postId = -1;
+		if(isPostValid(post)){
+			blogDao.createBlog(post);
+			postId = post.getId();
+		} else {
+			throw new InvalidPostException();
+		}
+		System.out.println("UserBlog.addPost()postId: "+postId);
+
+		return postId;
+	}*/
 	@Override
 	public boolean addPost(Post post) throws BlogException {
 		boolean isUserPostAdded = false;
