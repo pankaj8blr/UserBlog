@@ -6,21 +6,24 @@ $(document)
 						$("#userDetailsDiv").show();
 						$("#loginDiv").hide();
 						$("#userBlogEntryDiv").hide();
-						document.signinForm.Name.focus();
+//						document.signinForm.Name.focus();
+						$("#name").focus();
 					});
 					$('#back')
 					.click(function() {
 						$("#userDetailsDiv").hide();
 						$("#loginDiv").show();
 						$("#userBlogEntryDiv").hide();
-						document.signinForm.uname.focus();
+//						document.signinForm.uname.focus();
+						$("#uname").focus();
 					});
 					$('#backToUpdateUser')
 					.click(function() {
 						$("#userBlogEntryDiv").hide();
 						$("#loginDiv").hide();
 						$("#userDetailsDiv").show();
-						document.signinForm.Name.focus();
+//						document.signinForm.Name.focus();
+						$("#name").focus();
 					});
 					$('#addUser')
 							.click(
@@ -77,39 +80,57 @@ $(document)
 									dob : dob},
 									topic : {name:interest}
 								};
-								  console.log ( '#name: '+name+',phoneNumber: '+phoneNumber+',emailId: '+emailId+',password: '+password+',interest: '+interest );
+								  console.log ( '#uname: '+emailId+',psw: '+password);
 								$.ajax({
 											url : 'http://localhost:8080/blog/user/account/authenticateuser',
 											type : 'post',
 											contentType : 'application/json',
 											success : function(response) {
-												console.log("success response: "+ response);
-//												$("#openResults").html("Welcome To User Blog ");
-//												$("#openResults").show();
-//												$("#loginDiv").hide();
-//												$("#userDetailsDiv").hide();
-												$("#userBlogEntryDiv").show();
-											},
-											/*failure : function(response) {
+												console.log("Successfully Logged in: "+response);
 												$("#openResults")
 														.html(
-																"invalid login "
+																"User Logged in "
 																		+ response);
+												$("#loginDiv").hide();
 												$("#userDetailsDiv").hide();
-												$("#openResults").show();
-											},*/
-											data : JSON.stringify(data)
+//												$("#openResults").show();
+												$("#userBlogEntryDiv").show();
+											},
+											error : function(response) {
+												console.log("Not a subscriber: "+response);
+												
+//												$("#openResults").html("User Not Logged in "+ response);
+//												$("#openResults").show();
+												$("#loginDiv").hide();
+												$("#userBlogEntryDiv").hide();
+												$("#userDetailsDiv").show();
+											},
+											data:JSON.stringify(data)
 										});
 							});
 				
 				});
 
 function formValidation()  {
-	var uname = document.signinForm.Name;  
+	/*var uname = document.signinForm.Name;  
 	var uphonenumber = document.signinForm.PhoneNo;  
 	var uemail = document.signinForm.Email;  
 	var passid = document.signinForm.Pwd;  
-	var dob = document.signinForm.Dob;  
+	var dob = document.signinForm.Dob;  */
+	
+	/*var name = $("#name").val();
+	var phoneNumber = $("#phoneNumber").val();
+	var emailId = $("#emailId").val();
+	var password = $("#password").val();
+	var dob = $("#dob").val();
+	var interest = $("#interest").val();*/
+	
+	var uname =$("#name"); 
+    var uphonenumber = $("#phoneNumber");  
+	var uemail = $("#emailId");  
+	var passid = $("#password");  
+	var dob = $("#dob"); 
+	
 	if(validateName(uname)) {  
 		if(validateContactNumber(uphonenumber,10,6)){
 			if(validateEmail(uemail)) {  
@@ -124,7 +145,7 @@ function formValidation()  {
 		}
 	}
 }
-function validateName(uname)  
+/*function validateName(uname)  
 {   
 	var letters = /^[A-Za-z]+$/;  
 	if(uname.value.match(letters))  
@@ -141,12 +162,30 @@ function validateName(uname)
 		uname.focus();  
 		return false;  
 	}  
-}
+}*/
 
+function validateName(uname)  
+{   
+	var letters = /^[A-Za-z]+$/;  
+	if(uname.val().match(letters))  
+	{  
+		return true;  
+	}else if(uname.val()==""){
+		alert("Name field is blank!"); 
+		uname.focus(); 
+//		document.getElementById('emailId').style.borderColor = "red";
+		return false;  
+	} else  
+	{  
+		alert('Username must have alphabet characters only');  
+		uname.focus();  
+		return false;  
+	}  
+}
 function validateContactNumber(phonenumber,mx,min)  
 {   
 	var numbers = /^[0-9]+$/;
-	var phonenumber_len = phonenumber.value.length;  
+	var phonenumber_len = phonenumber.val().length;  
 	/*if(phonenumber_len==0){
 		alert('Phone Number field is Empty!');  
 		phonenumber.focus();  
@@ -167,7 +206,7 @@ function validateContactNumber(phonenumber,mx,min)
 		return true;  
 	}  */
 	if(phonenumber_len!=0){
-		if(phonenumber.value.match(numbers))  
+		if(phonenumber.val().match(numbers))  
 		{
 			if (phonenumber_len >= min && phonenumber_len <= mx )  
 			{ 
@@ -222,21 +261,23 @@ function validateContactNumber(phonenumber,mx,min)
 function validateEmail(inputText)  
 {  
 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
-if(inputText.value.match(mailformat))  
+if(inputText.val().match(mailformat))  
 {  
-document.signinForm.Email.focus();  
+//document.signinForm.Email.focus();
+	inputText.focus();
 return true;  
 }  
 else  
 {  
 alert("You have entered an invalid email address!");  
-document.signinForm.Email.focus();  
+//document.signinForm.Email.focus();
+inputText.focus();
 return false;  
 }  
 }
 function passid_validation(passid,mx,my)  
 {  
-	var passid_len = passid.value.length;  
+	var passid_len = passid.val().length;  
 	if (passid_len == 0 ||passid_len >= my || passid_len < mx)  
 	{  
 		alert("Password should not be empty / length be between "+mx+" to "+my);  
@@ -250,22 +291,22 @@ function validatedate(inputText)
 {  
 	var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;  
 //	Match the date format through regular expression  
-	if(inputText.value.match(dateformat))  
+	if(inputText.val().match(dateformat))  
 	{  
 		inputText.focus();  
 //		Test which seperator is used '/' or '-'  
-		var opera1 = inputText.value.split('/');  
-		var opera2 = inputText.value.split('-');  
+		var opera1 = inputText.val().split('/');  
+		var opera2 = inputText.val().split('-');  
 		lopera1 = opera1.length;  
 		lopera2 = opera2.length;  
 //		Extract the string into month, date and year  
 		if (lopera1>1)  
 		{  
-			var pdate = inputText.value.split('/');  
+			var pdate = inputText.val().split('/');  
 		}  
 		else if (lopera2>1)  
 		{  
-			var pdate = inputText.value.split('-');  
+			var pdate = inputText.val().split('-');  
 		}  
 		var dd = parseInt(pdate[0]);  
 		var mm  = parseInt(pdate[1]);  
@@ -305,7 +346,7 @@ function validatedate(inputText)
 	else  
 	{  
 		alert("Invalid date format!");  
-		document.form1.Dob.focus();  
+		inputText.focus();  
 		return false;  
 	}  
 }  

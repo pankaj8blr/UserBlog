@@ -58,8 +58,10 @@ public class UserBlogDAO implements BlogDAO {
 						appUserId=u.getAppUserId();
 						break;
 					}
-					System.out.println("UserBlogDAO.authenticateAppUser()user: "+u);
-					System.out.println("UserBlogDAO.authenticateAppUser()user.getEmail(): "+u.getEmail()+",user.getPassword(): "+u.getPassword());
+					System.out.println("UserBlogDAO.authenticateAppUser()user["+index+"]:"+u);
+					System.out.println("UserBlogDAO.authenticateAppUser()["+index+"]:"+",user.getEmail(): "+u.getEmail()+",user.getPassword(): "+u.getPassword());
+					System.out.println("UserBlogDAO.authenticateAppUser()getAppUserId["+index+"]:"+ u.getAppUserId());
+					System.out.println("UserBlogDAO.authenticateAppUser()+++++++++++++++++++++++++++++++++++++++++++++++++++++==");
 				}
 			}
 		}

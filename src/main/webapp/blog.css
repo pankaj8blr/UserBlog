@@ -1,6 +1,6 @@
 #userDetailsDiv{
 	display: none;
-	document.signinForm.uname.focus();
+	$("#uname").focus();
 }
 
 #userBlogEntryDiv{

@@ -33,7 +33,7 @@ public class UserController {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+//	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/authenticateuser")
 	public Response authenticateUser(AppUser user) {
 		System.out.println("UserController.authenticateUser() user: "+user);
@@ -41,12 +41,16 @@ public class UserController {
 		System.out.println("UserController.authenticateUser()blog: "+blog);
 		int appUserId = blog.authenticatedAppUser(user);
 		System.out.println("appUserId: "+appUserId);
-		Response res = Response.ok().entity("appUserId:" +appUserId).build();
+		/*Response res = Response.ok().entity("appUserId:" +appUserId).build();
 		System.out.println("UserController.authenticateUser()res: "+res);
 		System.out.println("UserController.authenticateUser() res.status: "+res.getStatus());
-		return res;
-////		return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//		return Response.status(Status.NOT_FOUND);
+		if(user!=null && user.getAppUserId()!=appUserId){
+			res = Response.noContent().entity(appUserId + "").build();
+		}else{
+			res = Response.ok().entity(appUserId + "").build();
+		}
+		return res;*/
+		return Response.ok().entity(appUserId + "").build();
 		
 	}
 	@PUT
