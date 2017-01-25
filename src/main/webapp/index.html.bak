@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Simple Blog</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src='blog.js'></script>
+<link rel='stylesheet' href='blog.css'>
+<link>
+</head>
+<body>
+	<h1>User Blog</h1>
+	<hr/>
+	<div id='loginForm'>
+		<label><b>Username</b></label>
+		 <input type="text"	placeholder="Enter Username" id="uname" required> <label><b>Password</b></label>
+		<input type="password" placeholder="Enter Password"  id="psw" required>
+		
+		<button type="submit" id='loginUser'>Login</button>
+		<input type="checkbox" checked="checked"> Remember me
+		
+		<div style="background-color: #f1f1f1">
+			<button type="button" id='registerbutton' class="register">Register</button>
+			<span class="psw">Forgot <a href="#">password?</a></span>
+		</div>
+	</div>
+
+	<form name="signupForm">
+	<div id='userDeatilsForm'>
+		<h2>Open A New User Account</h2>
+		<table>
+			<tr>
+				<td>Full Name</td>
+				<td><input type="text" name="Name" id='name' placeholder="Your Full Name"></td>
+			</tr>
+			<tr>
+				<td>Phone Number</td>
+				<td><input type="text" name="PhoneNo" id='phoneNumber' placeholder="Contact Number"></td>
+			</tr>
+			<tr>
+				<td>Email Id</td>
+				<td><input type="text" name="Email" id='emailId' placeholder="Valid email id"></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input type="password" name="Pwd" id='password' placeholder="Password"></td>
+			</tr>
+			<tr>
+				<td>Date Of Birth</td>
+				<td><input type="date" name="Dob" id="dob" min="1999-01-01"></td>
+			</tr>
+			<tr>
+				<td>Interest</td>
+				<td><select id="interest">
+						<!-- <option value="technology">Technology</option>
+						<option value="entertainment">Entertainment</option>
+						<option value="sports">Sports</option> -->
+						<option>Technology</option>
+						<option>Entertainment</option>
+						<option>Sports</option>
+				</select></td>
+			</tr>
+			<!-- <tr>
+				<td><button id='addUser'>Add User</button></td>
+			</tr>
+			<tr>
+				<td><button id='updateuser'>Update User</button></td>
+			</tr>
+			<tr>
+				<td><button id='back'>Back</button></td>
+			</tr> -->
+		</table>
+		<div style="background-color: #f1f1f1">
+			<button type="button" id='addUser' class="addUser">Add User</button>
+			<button type="button" id='updateUser' class="updateUser">Update User</button>
+			<button type="button" id='back' class="back">back</button>
+		</div>
+	</div>
+</form>>
+<div id='openResults'></div>
+	
+</body>
+</html>
